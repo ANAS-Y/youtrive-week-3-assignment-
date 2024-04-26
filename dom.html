@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        .highlight {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple DOM Manipulation</h1>
+    <form id="itemForm">
+        <input type="text" id="newItemText" placeholder="Add new item" required>
+        <button type="submit">Add Item</button>
+    </form>
+    <button id="changeColorBtn">Change Colors</button>
+    <ul id="itemsList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        // Access the form, input, button, and list elements
+        const form = document.getElementById('itemForm');
+        const newItemText = document.getElementById('newItemText');
+        const changeColorBtn = document.getElementById('changeColorBtn');
+        const itemsList = document.getElementById('itemsList');
+
+        // Event listener to handle form submission
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting traditionally
+
+            // Get the value from the input field
+            const text = newItemText.value.trim();
+
+            // Check if the text is not empty
+            if (text !== '') {
+                // Create a new list item
+                const newItem = document.createElement('li');
+                newItem.textContent = text;
+
+                // Append the new item to the list
+                itemsList.appendChild(newItem);
+
+                // Clear the input field after adding
+                newItemText.value = '';
+            }
+        });
+
+        // Event listener to change the color of list items
+        changeColorBtn.addEventListener('click', function() {
+            const items = itemsList.getElementsByTagName('li');
+            for (let item of items) {
+                // Toggle the highlight class
+                item.classList.toggle('highlight');
+            }
+        });
+    </script>
+</body>
+</html>
